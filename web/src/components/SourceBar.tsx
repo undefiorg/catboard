@@ -11,9 +11,9 @@ const Container = styled.div`
     justify-content: flex-end;
 
     .source-name {
+      white-space: nowrap;
       width: -webkit-fill-available;
       text-align: right;
-      padding-left: 0.3em;
       padding-right: 0.3em;
     }
   }

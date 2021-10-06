@@ -13,10 +13,6 @@ const Container = styled.div`
   display: flex;
   line-height: 20px;
 
-  .token-value {
-    color: darkgrey;
-  }
-
   .symbol-icon {
     display: flex;
     align-items: center;

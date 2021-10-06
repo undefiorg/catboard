@@ -4,8 +4,21 @@ import styled from 'styled-components';
 
 import FarmComponent from './components/FarmComponent';
 import RewardComponent from './components/RewardComponent';
+import HeaderComponent from './components/HeaderComponent';
 
-const Container = styled.div``
+const Container = styled.div`
+  font-family: "SF Pro TH","SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+  width: fit-content;
+  padding: 1em;
+
+  h3 {
+    padding: 0em;
+    margin: 0.3em;
+    line-height: 1em;
+    color: #929292;
+    font-weight: 400;
+  }
+`
 
 function App() {
   const farms = [{
@@ -50,7 +63,11 @@ function App() {
 
   return (
     <Container>
+      <h3>FARM</h3>
+      <HeaderComponent total={1239} profit={3434} />
       <FarmComponent data={farms} />
+      <h3>STAKE</h3>
+      <HeaderComponent total={123456} profit={3434} />
       <RewardComponent data={rewards} />
     </Container>
   );
