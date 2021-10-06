@@ -13,10 +13,6 @@ const Container = styled.div`
   display: flex;
   line-height: 20px;
 
-  .token-value {
-    color: darkgrey;
-  }
-
   .symbol-icon {
     display: flex;
     align-items: center;
@@ -83,13 +79,11 @@ const FarmComponent: React.FC<IFarmComponentProps & React.HTMLAttributes<HTMLDiv
 
     foo = [...Array.from(new Set(foo))]
 
-    return (
-      <Container>
-        <SourceBar sources={sources} />
-        <LineConnectors width={64} list={foo} />
-        <TokenBar equities={equities} />
-      </Container>
-    );
+    return <Container>
+      <SourceBar sources={sources} />
+      <LineConnectors width={64} list={foo} />
+      <TokenBar equities={equities} />
+    </Container>
   }
 
 export default FarmComponent;
