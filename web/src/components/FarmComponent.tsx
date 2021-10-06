@@ -86,7 +86,7 @@ const FarmComponent: React.FC<IFarmComponentProps & React.HTMLAttributes<HTMLDiv
     return (
       <Container>
         <SourceBar sources={sources} />
-        <LineConnectors width={64} height={320} list={foo} />
+        <LineConnectors width={64} list={foo} />
         <TokenBar equities={equities} />
       </Container>
     );
