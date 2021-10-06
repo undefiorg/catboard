@@ -4,6 +4,7 @@ import numeral from 'numeral';
 
 const Container = styled.div`
   padding-top: 0.3em;
+  width: 220px;
 
   .source {
     display: flex;

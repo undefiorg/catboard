@@ -30,6 +30,6 @@ export interface ILineConnectorsElement {
 
 export interface ILineConnectorsProps {
   width: number
-  height: number
+  height?: number | string
   list: ILineConnectorsElement[]
 }
