@@ -1,7 +1,6 @@
 import React from 'react';
 import numeral from 'numeral';
 import styled from 'styled-components';
-import _ from 'lodash'
 
 const Container = styled.div`
   display: flex;
