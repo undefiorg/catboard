@@ -1,7 +1,7 @@
 import tokens from './tokens.json';
 import tokenColors from './tokenColors.json';
 
-export const symbolColorMap = (symbol: string) => {
+export const symbolColorMap = (symbol: string): string => {
   // @ts-ignore
   if (tokenColors[symbol]) return tokenColors[symbol];
 

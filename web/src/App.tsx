@@ -26,22 +26,22 @@ function App() {
     principalSymbol: 'USDT',
     farmName: 'CAKE-USDT',
     investmentType: 'farm',
-    stratValue: 1234.56,
-    principalValue: 1234.56,
+    stratValue: 50,
+    principalValue: 50,
   }, {
     stratSymbol: 'ALPACA',
     principalSymbol: 'USDT',
     farmName: 'ALPACA-USDT',
     investmentType: 'stake',
-    stratValue: 1234.56,
-    principalValue: 1234.56,
+    stratValue: 50,
+    principalValue: 50,
   }, {
     stratSymbol: 'CAKE',
     principalSymbol: 'BUSD',
     farmName: 'CAKE-BUSD',
     investmentType: 'farm',
-    stratValue: 1234.56,
-    principalValue: 1234.56,
+    stratValue: 50,
+    principalValue: 50,
   }]
 
   const rewards = [{

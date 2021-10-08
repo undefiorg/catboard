@@ -26,6 +26,10 @@ const Container = styled.div`
       height: 16px;
     }
   }
+
+  svg{
+    padding-top: 0.3em;
+  }
 `
 interface IRewardData {
   poolName: string
@@ -71,10 +75,8 @@ const RewardComponent: React.FC<IRewardComponentProps & React.HTMLAttributes<HTM
         a: REWARD_SYMBOLS.indexOf(rewardSymbol),
         b: sourceNames.indexOf(poolName),
         c: symbolColorMap(poolSymbol),
-      }, {
-        a: REWARD_SYMBOLS.indexOf(rewardSymbol),
-        b: sourceNames.indexOf(poolName),
-        c: symbolColorMap(poolSymbol),
+        d: 0.3,
+        t: 3,
       })
     }
 
