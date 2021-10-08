@@ -71,10 +71,6 @@ const RewardComponent: React.FC<IRewardComponentProps & React.HTMLAttributes<HTM
         a: REWARD_SYMBOLS.indexOf(rewardSymbol),
         b: sourceNames.indexOf(poolName),
         c: symbolColorMap(poolSymbol),
-      }, {
-        a: REWARD_SYMBOLS.indexOf(rewardSymbol),
-        b: sourceNames.indexOf(poolName),
-        c: symbolColorMap(poolSymbol),
       })
     }
 
