@@ -24,7 +24,16 @@ function App() {
   const farms = [{
     stratSymbol: 'CAKE',
     principalSymbol: 'USDT',
+    farmName: 'CAKE^USDT',
+    farmType: 'single',
+    investmentType: 'farm',
+    stratValue: 1,
+    principalValue: 0,
+  }, {
+    stratSymbol: 'CAKE',
+    principalSymbol: 'USDT',
     farmName: 'CAKE-USDT',
+    farmType: 'pair',
     investmentType: 'farm',
     stratValue: 1234.56,
     principalValue: 1234.56,
@@ -32,6 +41,7 @@ function App() {
     stratSymbol: 'ALPACA',
     principalSymbol: 'USDT',
     farmName: 'ALPACA-USDT',
+    farmType: 'pair',
     investmentType: 'stake',
     stratValue: 1234.56,
     principalValue: 1234.56,
@@ -39,6 +49,7 @@ function App() {
     stratSymbol: 'CAKE',
     principalSymbol: 'BUSD',
     farmName: 'CAKE-BUSD',
+    farmType: 'pair',
     investmentType: 'farm',
     stratValue: 1234.56,
     principalValue: 1234.56,
@@ -46,16 +57,19 @@ function App() {
 
   const rewards = [{
     poolName: 'ibBNB',
+    poolType: 'pair',
     investmentType: 'stake',
     rewardValue: 123.45,
     rewardSymbol: 'ALPACA',
   }, {
     poolName: 'ibETH',
+    poolType: 'pair',
     investmentType: 'stake',
     rewardValue: 56.78,
     rewardSymbol: 'ALPACA',
   }, {
     poolName: 'ibALPACA',
+    poolType: 'pair',
     investmentType: 'stake',
     rewardValue: 456.78,
     rewardSymbol: 'ALPACA',
