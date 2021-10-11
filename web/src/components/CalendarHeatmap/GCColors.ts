@@ -1,2 +1,10 @@
-const colors = ['#222222', '#e74c3c', '#d35400', '#f39c12', '#f1c40f', '#2ecc71']
+const colors = [
+  { farm: '#222222' },
+  { stake: '#e74c3c' },
+  { deposit: '#d35400' },
+  { withdraw: '#f39c12' },
+  { approve: '#f1c40f' },
+  { swap: '#2ecc71' },
+]
+
 export { colors }

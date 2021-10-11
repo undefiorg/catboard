@@ -1,12 +1,11 @@
+import { useRef } from 'react'
 import { totalDaysInMonth, MONTH_NAMES } from '../../lib/helper'
-import SVG from '../../lib/svg-jsx'
 import { colors } from './GCColors'
-import { getGradeFromColor } from '../../lib/converters'
 
 export interface IBox {
   id: string,
   data: any,
-  ymd: string,
+  date: string,
   color: string,
 }
 
@@ -29,7 +28,7 @@ export type GCGraphProps = {
   onMouseOut: any,
 }
 
-const GCGraph: React.FC<Partial<GCGraphProps & React.HTMLAttributes<HTMLDivElement>>> = ({
+const GCGraph = ({
   x = 0,
   y = 0,
   w = 640,
@@ -42,16 +41,18 @@ const GCGraph: React.FC<Partial<GCGraphProps & React.HTMLAttributes<HTMLDivEleme
   limit = 7,
   padding = 2,
   monthNames = MONTH_NAMES,
-  boxes = [],
+  boxes,
   //@ts-ignore
   onClick,
   //@ts-ignore
   onMouseOver,
   //@ts-ignore
   onMouseOut,
-}) => {
-  // Canvas
-  const draw = new SVG(w.toString(), h.toString())
+}: Partial<GCGraphProps>) => {
+  const ref = useRef(null)
+
+  // Elements
+  let elements = []
 
   // Global
   const boxSizePadding = boxSize + padding
@@ -65,19 +66,20 @@ const GCGraph: React.FC<Partial<GCGraphProps & React.HTMLAttributes<HTMLDivEleme
   let dayY = boxSizePadding // Start at Sunday
   const drawDays = ['Mon', 'Wed', 'Fri']
 
-  drawDays.map((day, index) => {
-    draw.text({
+  elements.push(drawDays.map((day, index) => {
+    const text = <text {...{
       key: `d_${index}`,
       x: dayOffsetX,
       y: dayOffsetY + dayY,
-      value: day,
       fontFamily: font,
       fontSize
-    })
+    }} >{day}</text>
+
     dayY += boxSizePadding * 2
 
-    return day
-  })
+    return text
+  }))
+
   offsetX += 26
 
   // Months
@@ -89,22 +91,21 @@ const GCGraph: React.FC<Partial<GCGraphProps & React.HTMLAttributes<HTMLDivEleme
   slideMonths.push(slideMonths[0])
 
   let totalDaysInMonthSum = 0
-  slideMonths.map((month, index) => {
+  elements.push(slideMonths.map((month, index) => {
     const monthX = (totalDaysInMonthSum / 7.08) * boxSizePadding
-    draw.text({
+    const text = <text {...{
       key: `m_${index}`,
       x: monthOffsetX + monthX,
       y: monthOffsetY,
-      value: slideMonths[index].name,
       fontFamily: font,
       fontSize
-    })
+    }}>{slideMonths[index].name}</text>
 
     // next
     totalDaysInMonthSum += month.days
 
-    return month
-  })
+    return text
+  }))
   offsetY += monthHeight
 
   // Boxes
@@ -112,62 +113,66 @@ const GCGraph: React.FC<Partial<GCGraphProps & React.HTMLAttributes<HTMLDivEleme
     const boxOffsetX = offsetX
     const boxOffsetY = offsetY
 
-    boxes.map((box: IBox, index: number) => {
+    elements.push(boxes.map((box: IBox, index: number) => {
       // Positions
       const i = boxOffsetX + boxSizePadding * Math.floor(index / limit)
       const j = boxOffsetY + boxSizePadding * (index % limit)
 
       // Shape
-      draw.rect({
-        tag: box.data,
-        id: box.ymd,
+      return <rect {...{
+        'data-tag': box.data,
+        'data-id': box.date,
         key: `b_${index}`,
         x: i,
         y: j,
+        rx: 2,
+        ry: 2,
         width: boxSize,
         height: boxSize,
         fill: box.color,
         onClick,
-        onMouseOver,
+        onMouseOver: (e) => onMouseOver(e, ref.current),
         onMouseOut
-      })
-
-      return box
-    })
-    offsetY += boxOffsetY
+      }} />
+    }))
 
     // Description
-    colors.map((color, index) => {
+    const marginTop = 8
+    const marginLeft = 16
+    let offsetLabelX = 0
+    elements = elements.concat(colors.map((color, index) => {
       // Positions
-      const maxW = boxOffsetX + boxSizePadding * Math.floor(boxes.length / limit)
-      const i = maxW - (colors.length - 1) * boxSizePadding * 2 + index * boxSizePadding * 2
-      const j = offsetY + boxSizePadding * limit
+      const j = marginTop + offsetY + boxSizePadding * limit
+      const key = Object.keys(color)[0]
 
-      draw.text({
-        key: `e_${index}`,
-        x: i + boxSize / 2 - fontSize / 2 + 1,
-        y: j - 8,
-        value: getGradeFromColor(color),
-        fontFamily: font,
-        fontSize
-      })
+      const labelWidth = (index === 0 ? 0 : Object.keys(colors[index - 1])[0].length * fontSize / 2)
+      offsetLabelX += labelWidth + boxSize + 16
 
-      // Shape
-      // @ts-ignore
-      draw.rect({
-        key: `c_${index}`,
-        x: i,
-        y: j,
-        width: boxSize,
-        height: boxSize,
-        fill: color
-      })
-
-      return color
-    })
+      return [
+        <text {...{
+          key: `e_${index}`,
+          x: marginLeft + offsetLabelX + boxSize + 3,
+          y: j + boxSize / 2 + fontSize / 2 - 1,
+          fontFamily: font,
+          fontSize
+        }}>{key}</text>,
+        <rect {...{
+          key: `c_${index}`,
+          x: marginLeft + offsetLabelX,
+          y: j,
+          rx: 2,
+          ry: 2,
+          width: boxSize,
+          height: boxSize,
+          fill: Object.values(color)[0]
+        }} />
+      ]
+    }))
   }
 
-  return draw.jsx()
+  return <svg ref={ref} id='svg' width={w} height={h} viewBox={`0 0 ${w} ${h}`}>
+    <g>{elements}</g>
+  </svg>
 }
 
 export default GCGraph
