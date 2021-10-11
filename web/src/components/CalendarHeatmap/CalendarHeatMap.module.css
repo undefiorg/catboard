@@ -1,0 +1,28 @@
+.tooltiptext {
+  visibility: hidden;
+  font-family:'Helvetica';
+  font-size: 0.8em;
+  width: 100px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 4px;
+  border-radius: 6px;
+
+  position: absolute;
+  top:-0px;
+  left:0px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}

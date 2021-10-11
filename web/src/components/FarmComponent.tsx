@@ -31,6 +31,7 @@ interface IFarmData {
   stratSymbol: string
   principalSymbol: string
   farmName: string
+  farmType: string
   investmentType: string
   stratValue: number
   principalValue: number
@@ -60,6 +61,7 @@ const FarmComponent: React.FC<IFarmComponentProps & React.HTMLAttributes<HTMLDiv
     // get all sources
     const sources = [...Array.from(new Set(data.map(e => ({
       name: e.farmName,
+      type: e.farmType,
       value: e.stratValue + e.principalValue
     }))))]
     const sourceNames = sources.map(e => e.name)

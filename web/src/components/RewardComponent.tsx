@@ -29,6 +29,7 @@ const Container = styled.div`
 `
 interface IRewardData {
   poolName: string
+  poolType: string
   investmentType: string
   rewardValue: number
   rewardSymbol: string
@@ -59,6 +60,7 @@ const RewardComponent: React.FC<IRewardComponentProps & React.HTMLAttributes<HTM
     // get all sources
     const sources = [...Array.from(new Set(data.map(e => ({
       name: e.poolName,
+      type: e.poolType,
       value: e.rewardValue,
     }))))]
     const sourceNames = sources.map(e => e.name)
@@ -68,10 +70,6 @@ const RewardComponent: React.FC<IRewardComponentProps & React.HTMLAttributes<HTM
       const poolSymbol = poolName.substring(2).toUpperCase()
 
       foo.push({
-        a: REWARD_SYMBOLS.indexOf(rewardSymbol),
-        b: sourceNames.indexOf(poolName),
-        c: symbolColorMap(poolSymbol),
-      }, {
         a: REWARD_SYMBOLS.indexOf(rewardSymbol),
         b: sourceNames.indexOf(poolName),
         c: symbolColorMap(poolSymbol),

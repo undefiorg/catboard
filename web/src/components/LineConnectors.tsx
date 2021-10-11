@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { createCurve, ILineConnectorsProps } from '../lib/svgx'
+import { createCurve, ILineConnectorsProps } from '../lib/SVGLine'
 
 const LineConnectors = (props: ILineConnectorsProps) => {
   const lineHeight = 20

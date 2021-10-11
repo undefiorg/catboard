@@ -25,6 +25,7 @@ interface SourceBarProps {
 
 interface ISource {
   name: string
+  type: string
   value: number
 }
 
@@ -33,7 +34,7 @@ const SourceBar: React.FC<SourceBarProps & React.HTMLAttributes<HTMLDivElement>>
     const { sources } = props
     return <Container >
       {sources.map((source, i) => {
-        const symbols = source.name.split('-')
+        const symbols = source.name.split((source.type === 'single') ? '^' : '-')
         return (
           <div key={i} className="source">
             <span className="token-value">{numeral(source.value).format('($0.00a)')}</span>
