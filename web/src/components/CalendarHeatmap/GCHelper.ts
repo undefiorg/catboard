@@ -17,20 +17,16 @@ export const getBoxesFromActivities = (activities: IActivity[]): IBox[] => {
   const currentYear = now.getFullYear()
   const currentMonth = now.getMonth()
   const currentDate = now.getDate()
+  const endDay = now.getDay()
 
   const boxes: IBox[] = []
 
-  const beginDate = (currentDate % 7)
-  const totalDays = totalDaysInYear(currentYear) + beginDate
+  const beginDate = currentDate - endDay + 2
+  const totalDays = totalDaysInYear(currentYear) + new Date(now.getTime() - new Date(currentYear, 0, 1).getTime()).getUTCDate() + 1
   const activityMap = _.groupBy(activities, 'date') as IActivityMap
 
-  console.log('currentDate:', currentDate)
-  console.log('beginDate:', beginDate)
-  console.log('totalDays:', totalDays)
-  console.log('lol:', totalDays - beginDate)
-
   for (let i = beginDate; i <= totalDays; i++) {
-    const date = new Date(currentYear - 1, currentMonth, currentDate + i - beginDate + 1)
+    const date = new Date(currentYear - 1, currentMonth, i)
     const ymd = getYMD(date)
 
     const dailyActivities = activityMap[ymd]
@@ -38,9 +34,9 @@ export const getBoxesFromActivities = (activities: IActivity[]): IBox[] => {
       // Has activity on this day
       const dailyActivityBoxes = dailyActivities.map(activity => ({
         id: `b${i}`,
-        color: 'red',
+        color: activity.color,
         data: activity.data,
-        ymd: activity.date,
+        date: activity.date,
       }))
       // TOFIX: mixed data in one box
       boxes.push(dailyActivityBoxes[0])
@@ -50,14 +46,12 @@ export const getBoxesFromActivities = (activities: IActivity[]): IBox[] => {
         id: `b${i}`,
         color: '#eeeeee',
         data: ymd,
-        ymd,
+        date: ymd,
       }
 
       boxes.push(noActivityBox)
     }
   }
-
-  console.log(boxes.length)
 
   return boxes
 }

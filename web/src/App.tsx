@@ -6,6 +6,7 @@ import FarmComponent from './components/FarmComponent';
 import RewardComponent from './components/RewardComponent';
 import HeaderComponent from './components/HeaderComponent';
 import CalendarHeatmap from './components/CalendarHeatmap';
+import { IActivity } from './components/CalendarHeatmap/GCHelper';
 
 const Container = styled.div`
   font-family: "SF Pro TH","SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
@@ -79,22 +80,28 @@ function App() {
   const activities = [{
     date: '2021-01-01',
     data: 123.45,
+    color: 'red',
   }, {
     date: '2021-02-01',
     data: 23.45,
+    color: 'red',
   }, {
     date: '2021-03-01',
     data: 423.45,
+    color: 'red',
   }, {
     date: '2021-04-01',
     data: 43.45,
+    color: 'red',
   }, {
     date: '2021-10-10',
     data: 43.45,
-  }]
+    color: 'blue',
+  }] as IActivity[]
 
   return (
     <Container>
+      <h3>ACTIVITY</h3>
       <CalendarHeatmap data={activities} />
       <h3>FARM</h3>
       <HeaderComponent total={1239} profit={3434} />
