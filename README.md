@@ -10,5 +10,5 @@ Cozy And Trustful DeFi dashboard
 - [ ] Add visualized transaction history. 
 
 ## v3
-- [ ] Record history on solana.
+- [ ] Record history on Solana-Arweave.
 - [ ] Plot history graph.
